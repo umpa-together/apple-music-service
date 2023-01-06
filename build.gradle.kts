@@ -11,6 +11,13 @@ group = "com.umpa"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
+dependencyManagement {
+	val springCloudVersion = "2021.0.5"
+	imports {
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -20,6 +27,10 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
