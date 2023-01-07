@@ -1,9 +1,13 @@
 package com.umpa.applemusic.clients
 
 import com.umpa.applemusic.support.enums.AppleMusicType
+import com.umpa.applemusic.support.error.ApplicationException
+import com.umpa.applemusic.support.error.DefaultErrorTypeType
+import com.umpa.applemusic.support.error.FeignClientException
 import com.umpa.applemusic.support.utils.AppleMusicCursorKeyParser
 import feign.FeignException
 import org.slf4j.LoggerFactory
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 
 @Component
@@ -24,8 +28,9 @@ class AppleMusicClient(
                 ) as LinkedHashMap<String, LinkedHashMap<String, Any>>
             return getAppleMusicResultsByTypes(results, appleMusicType.type)
         } catch (e: FeignException) {
+            throw FeignClientException(e.message, HttpStatus.valueOf(e.status()))
         }
-        throw RuntimeException()
+        throw ApplicationException(DefaultErrorTypeType.INTERNAL_SERVER_ERROR)
     }
 
     fun getNextByCursorKey(cursorKey: String): AppleMusicResultResponse {
@@ -43,8 +48,9 @@ class AppleMusicClient(
                 ) as LinkedHashMap<String, LinkedHashMap<String, Any>>
             return getAppleMusicResultsByTypes(results, appleMusicCursorKey.types)
         } catch (e: FeignException) {
+            throw FeignClientException(e.message, HttpStatus.valueOf(e.status()))
         }
-        throw RuntimeException()
+        throw ApplicationException(DefaultErrorTypeType.INTERNAL_SERVER_ERROR)
     }
 
     fun getHintsByKeyword(term: String): AppleMusicHintResponse {
@@ -61,8 +67,9 @@ class AppleMusicClient(
                 hints = results["terms"] ?: emptyList()
             )
         } catch (e: FeignException) {
+            throw FeignClientException(e.message, HttpStatus.valueOf(e.status()))
         }
-        throw RuntimeException()
+        throw ApplicationException(DefaultErrorTypeType.INTERNAL_SERVER_ERROR)
     }
 
     private fun getAppleMusicResultsByTypes(

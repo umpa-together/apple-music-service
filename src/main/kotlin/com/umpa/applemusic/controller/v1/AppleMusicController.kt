@@ -1,4 +1,4 @@
-package com.umpa.applemusic.controller
+package com.umpa.applemusic.controller.v1
 
 import com.umpa.applemusic.clients.AppleMusicHintResponse
 import com.umpa.applemusic.clients.AppleMusicResultResponse
