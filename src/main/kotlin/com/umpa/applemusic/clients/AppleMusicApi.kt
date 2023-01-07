@@ -2,8 +2,8 @@ package com.umpa.applemusic.clients
 
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestParam
 
 @FeignClient(
@@ -18,16 +18,9 @@ interface AppleMusicApi {
     fun getResultsByName(
         @RequestParam term: String,
         @RequestParam limit: Int = LIMIT,
-    )
-
-    @GetMapping(
-        value = ["/v1/catalog/kr/search"],
-        consumes = [MediaType.APPLICATION_JSON_VALUE]
-    )
-    fun getNextByCursorKey(
-        cursorKey: String,
-        @RequestParam limit: Int = LIMIT
-    )
+        @RequestParam types: String,
+        @RequestParam offset: Int = 0
+    ): ResponseEntity<LinkedHashMap<String, LinkedHashMap<String ,Any>>>
 
     @GetMapping(
         value = ["/v1/catalog/kr/search/hints"],
@@ -36,7 +29,7 @@ interface AppleMusicApi {
     fun getHintsByKeyword(
         @RequestParam term: String,
         @RequestParam limit: Int = HINT_LIMIT
-    )
+    ): ResponseEntity<LinkedHashMap<String, LinkedHashMap<String, Any>>>
 
     companion object {
         const val LIMIT = 20
