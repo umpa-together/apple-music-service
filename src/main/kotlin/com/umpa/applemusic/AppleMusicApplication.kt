@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class AppleMusicApplication
 
 fun main(args: Array<String>) {
-	runApplication<AppleMusicApplication>(*args)
+    runApplication<AppleMusicApplication>(*args)
 }
