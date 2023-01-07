@@ -17,7 +17,7 @@ import java.io.StringReader
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.Duration
-import java.util.*
+import java.util.Date
 
 @Configuration
 @EnableFeignClients
@@ -27,7 +27,7 @@ internal class AppleMusicConfig {
         return AppleMusicAuthorizationInterceptor()
     }
 
-    class AppleMusicAuthorizationInterceptor: RequestInterceptor {
+    class AppleMusicAuthorizationInterceptor : RequestInterceptor {
         @Value("\${clients.apple-music.issuer}")
         lateinit var issuer: String
         @Value("\${clients.apple-music.api-key}")

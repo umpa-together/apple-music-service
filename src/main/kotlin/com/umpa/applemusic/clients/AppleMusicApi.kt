@@ -20,7 +20,7 @@ interface AppleMusicApi {
         @RequestParam limit: Int = LIMIT,
         @RequestParam types: String,
         @RequestParam offset: Int = 0
-    ): ResponseEntity<LinkedHashMap<String, LinkedHashMap<String ,Any>>>
+    ): ResponseEntity<LinkedHashMap<String, LinkedHashMap<String, Any>>>
 
     @GetMapping(
         value = ["/v1/catalog/kr/search/hints"],
