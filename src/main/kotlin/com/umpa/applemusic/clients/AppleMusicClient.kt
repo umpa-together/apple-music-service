@@ -2,7 +2,7 @@ package com.umpa.applemusic.clients
 
 import com.umpa.applemusic.support.enums.AppleMusicType
 import com.umpa.applemusic.support.error.ApplicationException
-import com.umpa.applemusic.support.error.DefaultErrorTypeType
+import com.umpa.applemusic.support.error.DefaultErrorType
 import com.umpa.applemusic.support.error.FeignClientException
 import com.umpa.applemusic.support.utils.AppleMusicCursorKeyParser
 import feign.FeignException
@@ -30,7 +30,7 @@ class AppleMusicClient(
         } catch (e: FeignException) {
             throw FeignClientException(e.message, HttpStatus.valueOf(e.status()))
         }
-        throw ApplicationException(DefaultErrorTypeType.INTERNAL_SERVER_ERROR)
+        throw ApplicationException(DefaultErrorType.INTERNAL_SERVER_ERROR)
     }
 
     fun getNextByCursorKey(cursorKey: String): AppleMusicResultResponse {
@@ -50,7 +50,7 @@ class AppleMusicClient(
         } catch (e: FeignException) {
             throw FeignClientException(e.message, HttpStatus.valueOf(e.status()))
         }
-        throw ApplicationException(DefaultErrorTypeType.INTERNAL_SERVER_ERROR)
+        throw ApplicationException(DefaultErrorType.INTERNAL_SERVER_ERROR)
     }
 
     fun getHintsByKeyword(term: String): AppleMusicHintResponse {
@@ -69,7 +69,7 @@ class AppleMusicClient(
         } catch (e: FeignException) {
             throw FeignClientException(e.message, HttpStatus.valueOf(e.status()))
         }
-        throw ApplicationException(DefaultErrorTypeType.INTERNAL_SERVER_ERROR)
+        throw ApplicationException(DefaultErrorType.INTERNAL_SERVER_ERROR)
     }
 
     private fun getAppleMusicResultsByTypes(

@@ -1,7 +1,7 @@
 package com.umpa.applemusic.controller
 
 import com.umpa.applemusic.support.error.ApplicationException
-import com.umpa.applemusic.support.error.DefaultErrorTypeType
+import com.umpa.applemusic.support.error.DefaultErrorType
 import com.umpa.applemusic.support.error.ErrorResponse
 import com.umpa.applemusic.support.error.FeignClientException
 import org.slf4j.LoggerFactory
@@ -23,7 +23,7 @@ class ApiControllerAdvice {
     @ExceptionHandler(FeignClientException::class)
     fun handleFeignException(e: FeignClientException): ResponseEntity<ErrorResponse> {
         logger.info("FeignException: {}", e.message, e)
-        val errorType = DefaultErrorTypeType.INTERNAL_SERVER_ERROR
+        val errorType = DefaultErrorType.INTERNAL_SERVER_ERROR
         return ResponseEntity.status(errorType.statusCode.value())
             .body(ErrorResponse(errorType.message, errorType.statusCode.value()))
     }
@@ -31,7 +31,7 @@ class ApiControllerAdvice {
     @ExceptionHandler(RuntimeException::class)
     fun handleRuntimeException(e: RuntimeException): ResponseEntity<ErrorResponse> {
         logger.info("RuntimeException: {}", e.message, e)
-        val errorType = DefaultErrorTypeType.INTERNAL_SERVER_ERROR
+        val errorType = DefaultErrorType.INTERNAL_SERVER_ERROR
         return ResponseEntity.status(errorType.statusCode.value())
             .body(ErrorResponse(errorType.message, errorType.statusCode.value()))
     }

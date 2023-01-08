@@ -2,7 +2,7 @@ package com.umpa.applemusic.support.error
 
 import org.springframework.http.HttpStatus
 
-enum class DefaultErrorTypeType(
+enum class DefaultErrorType(
     override val message: String,
     override val statusCode: HttpStatus
 ) : ErrorType {
